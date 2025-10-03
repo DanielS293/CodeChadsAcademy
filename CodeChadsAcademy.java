@@ -154,7 +154,7 @@ public class CodeChadsAcademy {
         // Se resuelve qué estudiante obtuvo el promedio más alto.
 
         double mejorPromedioEstudiantes = 0;
-        int numeroMejorEstudiante = 0;
+        int numeroMejorEstudiante = 1;
 
         for (int i = 0; i < estudiantes.length; i++) {
             System.out.print("Estudiante número " + (i+1) + ": ");
@@ -177,6 +177,21 @@ public class CodeChadsAcademy {
 
         System.out.println("\nMejor promedio: Estudiante número " + numeroMejorEstudiante + " con " + mejorPromedioEstudiantes + "puntos.");
                 
+        // Se resuelve cuál fué el más regular (menor desviación entre notas).
+
+        // Se resuelve quién tuvo el peor rendimiento en la tercera prueba.
+
+        double peorTercerExamen = estudiantes[0][2];
+        int numeroEstudiantePeorExamen = 1;
+
+        for (int i = 0; i < estudiantes.length; i++) {
+            if (estudiantes[i][2] < peorTercerExamen){
+                    peorTercerExamen = estudiantes[i][2];
+                    numeroEstudiantePeorExamen = i+1;    
+            }
+        }
+
+        System.out.println("\nPeor rendimiento en la tercera prueba: Estudiante número " + numeroEstudiantePeorExamen + " con " + peorTercerExamen + " puntos.");
 
     }
 }   
