@@ -31,11 +31,10 @@ public class CodeChadsAcademy {
         // Resumen de calificaciones: 
 
         System.out.println("\n-- RESUMEN DE CALIFICACIONES --");
-        System.out.println("Examen 1: " + notasDeExamenes[0] + 
-        "\nExamen 2: " + notasDeExamenes[1] + 
-        "\nExamen 3: " + notasDeExamenes[2] + 
-        "\nExamen 4: " + notasDeExamenes[3] + 
-        "\nExamen 5: " + notasDeExamenes[4]);    
+
+        for (int i = 0; i < notasDeExamenes.length; i++) {
+            System.out.println("Examen " + (i+1) + ": " + String.format("%.2f", notasDeExamenes[i]));
+        }
 
         // 1. Verificar si aprobó todos los exámenes.
 
@@ -91,15 +90,11 @@ public class CodeChadsAcademy {
             }
         }
 
-        System.out.println(
-            "\nNotas ordenadas de mayor a menor: " + 
-            "\n1: " + notasAOrdenar[0] + 
-            "\n2: " + notasAOrdenar[1] + 
-            "\n3: " + notasAOrdenar[2] + 
-            "\n4: " + notasAOrdenar[3] + 
-            "\n5: " + notasAOrdenar[4]
-        );
-        
+        System.out.println("\nNotas ordenadas de mayor a menor:");
+        for (int i = 0; i < notasAOrdenar.length; i++) {
+            System.out.println((i+1) + ": " + String.format("%.2f", notasAOrdenar[i]));
+        }
+
         // 5. Evaluación final por nivel:
 
         double notaTotal = 0;
@@ -131,7 +126,7 @@ public class CodeChadsAcademy {
         estudiantes [1][0] = 40;
         estudiantes [1][1] = 28.9;
         estudiantes [1][2] = 60;
-        estudiantes [1][3] = 62;
+        estudiantes [1][3] = 69;
         estudiantes [1][4] = 50;
 
         // Se cargan notas del tercer estudiante.
@@ -145,8 +140,8 @@ public class CodeChadsAcademy {
         estudiantes [3][0] = 97;
         estudiantes [3][1] = 78;
         estudiantes [3][2] = 88.2;
-        estudiantes [3][3] = 100;
-        estudiantes [3][4] = 86;
+        estudiantes [3][3] = 99;
+        estudiantes [3][4] = 100;
 
         System.out.println("\n--- RANKING DE ESTUDIANTES ---");
         System.out.println("Resumen de promedios: \n");
@@ -167,7 +162,7 @@ public class CodeChadsAcademy {
             
             acumuladorPromedio = acumuladorPromedio / estudiantes[i].length;
 
-            System.out.println(acumuladorPromedio + " puntos.");
+            System.out.println(String.format("%.2f", acumuladorPromedio) + " puntos.");
             
             if (acumuladorPromedio > mejorPromedioEstudiantes){
                 mejorPromedioEstudiantes = acumuladorPromedio;
@@ -175,9 +170,31 @@ public class CodeChadsAcademy {
             }
         }  
 
-        System.out.println("\nMejor promedio: Estudiante número " + numeroMejorEstudiante + " con " + mejorPromedioEstudiantes + "puntos.");
+        System.out.println("\nMejor promedio: Estudiante número " + numeroMejorEstudiante + " con " + mejorPromedioEstudiantes + " puntos.");
                 
         // Se resuelve cuál fué el más regular (menor desviación entre notas).
+        // Se toma solo la menor diferencia entre notas consecutivas a fines prácticos.
+
+        double menorDesviacionNotas = 1000;
+        int numeroEstudianteMenorDesviacion = 0;
+        double acumuladorTemporalTercerExamen;
+
+        for (int i = 0; i < estudiantes.length; i++) {
+            
+            for (int j = 0; j < estudiantes[i].length - 1; j++) {
+                acumuladorTemporalTercerExamen = estudiantes[i][j] - estudiantes[i][j+1];
+                if (acumuladorTemporalTercerExamen < 0) {
+                    acumuladorTemporalTercerExamen = acumuladorTemporalTercerExamen * (-1);                    
+                }
+                if (acumuladorTemporalTercerExamen < menorDesviacionNotas){
+                    menorDesviacionNotas = acumuladorTemporalTercerExamen;
+                    numeroEstudianteMenorDesviacion = i + 1;
+                }               
+            }
+        }
+
+        System.out.println("\nEl estudiante con menor desviación entre notas fué el número " + 
+         numeroEstudianteMenorDesviacion + " con " + String.format("%.2f", menorDesviacionNotas) + " puntos entre un examen y el siguiente.");   
 
         // Se resuelve quién tuvo el peor rendimiento en la tercera prueba.
 
@@ -191,7 +208,8 @@ public class CodeChadsAcademy {
             }
         }
 
-        System.out.println("\nPeor rendimiento en la tercera prueba: Estudiante número " + numeroEstudiantePeorExamen + " con " + peorTercerExamen + " puntos.");
+        System.out.println("\nEl estudiante con el peor rendimiento en el tercer examen fué el número " + 
+        numeroEstudiantePeorExamen + " con " + String.format("%.2f", peorTercerExamen) + " puntos.");
 
     }
 }   
