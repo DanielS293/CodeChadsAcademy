@@ -69,9 +69,36 @@ public class CodeChadsAcademy {
             System.out.println("¡Nivel PROGRESIVO! Sos un Stone Chad en crecimiento.");;
         }
         
-
         // 4. Mostrar notas ordenadas (sin usar sort):
+        // Se aplica técnica bubble sort.
 
+        double [] notasAOrdenar = notasDeExamenes.clone();
+
+        for (int i = 0; i < notasAOrdenar.length - 1; i++) {
+            boolean huboCambios = true;
+            
+            for (int j = 0; j < notasAOrdenar.length - i - 1; j++) {
+                if (notasAOrdenar[j] < notasAOrdenar[j + 1]) {
+                    double variableTemporal = notasAOrdenar[j];
+                    notasAOrdenar[j] = notasAOrdenar[j + 1];
+                    notasAOrdenar[j + 1] = variableTemporal;
+                    huboCambios = false;
+                }
+            }
+
+            if (huboCambios) {
+                break;
+            }
+        }
+
+        System.out.println(
+            "\nNotas ordenadas de mayor a menor: " + 
+            "\n1: " + notasAOrdenar[0] + 
+            "\n2: " + notasAOrdenar[1] + 
+            "\n3: " + notasAOrdenar[2] + 
+            "\n4: " + notasAOrdenar[3] + 
+            "\n5: " + notasAOrdenar[4]
+        );
         
         // 5. Evaluación final por nivel:
 
@@ -90,7 +117,66 @@ public class CodeChadsAcademy {
         }
 
         // 6. (Desafío final) Ranking entre varios alumnos:
+        
+        double [][] estudiantes = new double [4][5];
 
+        // Se cargan notas del primer estudiante.
+        estudiantes [0][0] = 60;
+        estudiantes [0][1] = 55.1;
+        estudiantes [0][2] = 90;
+        estudiantes [0][3] = 72.3;
+        estudiantes [0][4] = 45.5;
+
+        // Se cargan notas del segundo estudiante.
+        estudiantes [1][0] = 40;
+        estudiantes [1][1] = 28.9;
+        estudiantes [1][2] = 60;
+        estudiantes [1][3] = 62;
+        estudiantes [1][4] = 50;
+
+        // Se cargan notas del tercer estudiante.
+        estudiantes [2][0] = 18;
+        estudiantes [2][1] = 58;
+        estudiantes [2][2] = 79.8;
+        estudiantes [2][3] = 87;
+        estudiantes [2][4] = 11;
+
+        // Se cargan notas del cuarto estudiante.
+        estudiantes [3][0] = 97;
+        estudiantes [3][1] = 78;
+        estudiantes [3][2] = 88.2;
+        estudiantes [3][3] = 100;
+        estudiantes [3][4] = 86;
+
+        System.out.println("\n--- RANKING DE ESTUDIANTES ---");
+        System.out.println("Resumen de promedios: \n");
+
+        // Se resuelve qué estudiante obtuvo el promedio más alto.
+
+        double mejorPromedioEstudiantes = 0;
+        int numeroMejorEstudiante = 0;
+
+        for (int i = 0; i < estudiantes.length; i++) {
+            System.out.print("Estudiante número " + (i+1) + ": ");
+
+            double acumuladorPromedio = 0;
+            
+            for (int j = 0; j < estudiantes[i].length; j++) {
+                acumuladorPromedio += estudiantes[i][j];
+            }
+            
+            acumuladorPromedio = acumuladorPromedio / estudiantes[i].length;
+
+            System.out.println(acumuladorPromedio + " puntos.");
+            
+            if (acumuladorPromedio > mejorPromedioEstudiantes){
+                mejorPromedioEstudiantes = acumuladorPromedio;
+                numeroMejorEstudiante = i+1;    
+            }
+        }  
+
+        System.out.println("\nMejor promedio: Estudiante número " + numeroMejorEstudiante + " con " + mejorPromedioEstudiantes + "puntos.");
+                
 
     }
-}
+}   
